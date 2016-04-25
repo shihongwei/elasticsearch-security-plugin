@@ -30,7 +30,7 @@ public class SecurityPlugin extends Plugin {
      * @param module the {@link HttpServerModule} to set
      */
     public void onModule(HttpServerModule module) {
-        module.setHttpServerTransport(SecuredHttpServerTransport.class, name());
+        module.setHttpServerTransport(SecuredHttp.class, name());
     }
 
 	/**

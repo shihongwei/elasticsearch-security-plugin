@@ -30,9 +30,6 @@ public class SSLEngineFactory {
     	try (InputStream in = new FileInputStream(config)) {
         	prop.load(in);
     	}
-    	if (!Boolean.valueOf(prop.getProperty("https", "false"))) {
-    		return null;
-    	}
     	String keystoreType = prop.getProperty("keystore.type", "PKCS12");
 		String keystoreFile = prop.getProperty("keystore.file", home + "/config/" + SecurityPlugin.NAME + "/keystore.p12");
     	String keystorePassword = prop.getProperty("keystore.password", "changeit");

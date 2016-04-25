@@ -13,16 +13,14 @@ import org.elasticsearch.common.util.BigArrays;
 import org.elasticsearch.http.HttpChannel;
 import org.elasticsearch.http.HttpRequest;
 import org.elasticsearch.http.netty.NettyHttpServerTransport;
-import org.jboss.netty.channel.ChannelHandlerContext;
 import org.jboss.netty.channel.ChannelPipeline;
 import org.jboss.netty.channel.ChannelPipelineFactory;
-import org.jboss.netty.channel.ExceptionEvent;
 import org.jboss.netty.handler.ssl.SslHandler;
 
 /**
  * @author Tamal Kanti Nath
  */
-public class SecuredHttpServerTransport extends NettyHttpServerTransport {
+public class SecuredHttp extends NettyHttpServerTransport {
 
 	SSLContext sslContext;
 
@@ -35,7 +33,7 @@ public class SecuredHttpServerTransport extends NettyHttpServerTransport {
 	 * @throws IOException if keystore or the config file cannot be read
 	 */
 	@Inject
-	public SecuredHttpServerTransport(Settings settings, NetworkService networkService, BigArrays bigArrays) throws IOException, GeneralSecurityException {
+	public SecuredHttp(Settings settings, NetworkService networkService, BigArrays bigArrays) throws IOException, GeneralSecurityException {
 		super(settings, networkService, bigArrays);
 		sslContext = SSLEngineFactory.createSSLContext();
 	}
@@ -57,7 +55,7 @@ public class SecuredHttpServerTransport extends NettyHttpServerTransport {
 
     	private SSLContext sslContext;
 
-    	public HttpsChannelPipelineFactory(SecuredHttpServerTransport transport, boolean detailedErrorsEnabled) {
+    	public HttpsChannelPipelineFactory(SecuredHttp transport, boolean detailedErrorsEnabled) {
             super(transport, detailedErrorsEnabled);
             this.sslContext = transport.sslContext;
         }
